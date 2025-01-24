@@ -1,0 +1,77 @@
+import numpy as np
+scores = np.array([
+    [85, 90, 78, 92, 88],   
+    [72, 75, 80, 68, 74],   
+    [95, 88, 92, 96, 90],   
+    [60, 65, 70, 58, 62],   
+    [88, 84, 86, 89, 87]    
+])
+# 1
+student_3_scores = scores[2]
+print("Student 3 scores:", student_3_scores)
+# 2
+subject_2_scores = scores[:, 1]
+print("Subject 2 scores:", subject_2_scores)
+# 3
+first_3_students_first_2_subjects = scores[:3, :2]
+print("First 3 students, first 2 subjects:\n", first_3_students_first_2_subjects)
+# 4
+last_2_students_last_3_subjects = scores[-2:, -3:]
+print("Last 2 students, last 3 subjects:\n", last_2_students_last_3_subjects)
+# 5
+scores_with_bonus = scores + 5
+print("Scores with 5 bonus marks added:\n", scores_with_bonus)
+# 6
+scores_with_deduction = scores.copy()
+scores_with_deduction[:, 3] -= 10
+print("Scores with 10 marks deducted from Subject 4:\n", scores_with_deduction)
+# 7.
+percentage_scores = (scores_with_bonus.sum(axis=1) / (100 * 5)) * 100
+print("Percentage scores of each student:", percentage_scores)
+# 8
+average_scores_per_student = scores_with_bonus.mean(axis=1)
+print("Average score for each student:", average_scores_per_student)
+# 9
+total_marks_per_student = scores_with_bonus.sum(axis=1)
+print("Total marks scored by each student:", total_marks_per_student)
+# 10
+highest_score = scores_with_bonus.max()
+print("Highest score in the entire array:", highest_score)
+# 11
+average_scores_per_subject = scores_with_bonus.mean(axis=0)
+print("Average score for each subject:", average_scores_per_subject)
+# 12
+lowest_average_student = np.argmin(average_scores_per_student)
+print("Student with the lowest average score:", lowest_average_student + 1)
+
+
+
+#output
+Student 3 scores: [95 88 92 96 90]
+Subject 2 scores: [90 75 88 65 84]
+First 3 students, first 2 subjects:
+ [[85 90]
+ [72 75]
+ [95 88]]
+Last 2 students, last 3 subjects:
+ [[70 58 62]
+ [86 89 87]]
+Scores with 5 bonus marks added:
+ [[ 90  95  83  97  93]
+ [ 77  80  85  73  79]
+ [100  93  97 101  95]
+ [ 65  70  75  63  67]
+ [ 93  89  91  94  92]]
+Scores with 10 marks deducted from Subject 4:
+ [[85 90 78 82 88]
+ [72 75 80 58 74]
+ [95 88 92 86 90]
+ [60 65 70 48 62]
+ [88 84 86 79 87]]
+Percentage scores of each student: [91.6 78.8 97.2 68.  91.8]
+Average score for each student: [91.6 78.8 97.2 68.  91.8]
+Total marks scored by each student: [458 394 486 340 459]
+Highest score in the entire array: 101
+Average score for each subject: [85.  85.4 86.2 85.6 85.2]
+Student with the lowest average score: 4
+PS C:\Users\Welcome\Downloads> 
