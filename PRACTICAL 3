@@ -1,0 +1,94 @@
+import pandas as pd
+
+# Sample data: Student exam scores 
+data = {
+    "Math": [85, 78, 92, 60, 74, 88],
+    "Science": [80, 82, 89, 65, 70, 90],
+    "English": [75, 85, 78, 55, 72, 88], 
+    "History": [70, 75, 80, 50, 68, 82]
+}
+
+students = ["Student 1", "Student 2", "Student 3", "Student 4", "Student 5", "Student 6"]
+
+X= pd.DataFrame(data, index=students)
+
+# Display the first three rows
+print(X.head(3))
+
+# Get the total number of students and subjects
+total_students, total_subjects = X.shape
+print(f"Total number of students: {total_students}")
+print(f"Total number of subjects: {total_subjects}")
+
+# List all subject names and student names
+subject_names = X.columns.tolist()
+student_names = X.index.tolist()
+print(f"Subjects: {subject_names}")
+print(f"Students: {student_names}")
+
+# Display the data type of each column
+print(X.dtypes)
+
+# Check if there are any missing values in the DataFrame
+print(X.isnull().sum())
+
+# Retrieve the scores of Student 3 in all subjects
+student_3_scores = X.loc["Student 3"]
+print(f"Student 3's scores: \n{student_3_scores}")
+
+# Extract the scores of all students in Math
+math_scores = X["Math"]
+print(f"Math scores: \n{math_scores}")
+
+# Retrieve the scores of Student 1 and Student 4 in Scienc and English
+scores_student_1_4 = X.loc[["Student 1", "Student 4"], ["Science", "English"]]
+print(f"Scores of Student 1 and Student 4 in Science and English: \n{scores_student_1_4}")
+
+# Slice the DataFrame to get the first 4 students and the first 3 subjects
+sliced_data = X.iloc[:4, :3]
+print(f"First 4 students and first 3 subjects: \n{sliced_data}")
+
+# Retrieve the score of Student 5 in History using .loc or .iloc
+student_5_history = X.loc["Student 5", "History"]
+print(f"Student 5's score in History: {student_5_history}")
+
+# Update the score of Student 2 in Math to 85
+X.loc["Student 2", "Math"] = 85
+print(f"Updated scores: \n{X}")
+
+# Add a new student, Student 7, with scores [90, 85, 88, 80] for all subjects
+X.loc["Student 7"] = [90, 85, 88, 80]
+print(f"Updated DataFrame with Student 7: \n{X}")
+
+# Add 5 bonus marks to all students scores
+X += 5
+print(f"Scores after adding 5 bonus marks: \n{X}")
+
+# Deduct 3 marks from the scores of Student 4 in all subjects
+X.loc["Student 4"] -= 3
+print(f"Scores after deducting 3 marks from Student 4: \n{X}")
+
+# Calculate the percentage of marks obtained by each student
+total_possible_marks = total_subjects * 100
+student_percentage = X.sum(axis=1) / total_possible_marks * 100
+print(f"Percentage of marks obtained by each student: \n{student_percentage}")
+
+# Calculate the total marks obtained by each student
+total_marks_per_student = X.sum(axis=1)
+print(f"Total marks obtained by each student: \n{total_marks_per_student}")
+
+# Determine the total marks scored in each subject
+total_marks_per_subject = X.sum(axis=0)
+print(f"Total marks scored in each subject: \n{total_marks_per_subject}")
+
+# Identify the student with the highest total marks
+student_with_highest_marks = total_marks_per_student.idxmax()
+print(f"Student with the highest total marks: {student_with_highest_marks}")
+
+# Find the subject with the lowest total marks
+subject_with_lowest_marks = total_marks_per_subject.idxmin()
+print(f"Subject with the lowest total marks: {subject_with_lowest_marks}")
+
+# Compute the average marks scored by each student across all subjects
+average_marks_per_student = X.mean(axis=1)
+print(f"Average marks scored by each student: \n{average_marks_per_student}")
